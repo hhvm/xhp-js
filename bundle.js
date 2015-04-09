@@ -7,4 +7,12 @@ var Herp = {
 
 module.exports = Herp;
 
+},{}],"MyInstance":[function(require,module,exports){
+function MyInstance(node, message) {
+  console.log(node);
+  alert('in constructor with message'+message);
+}
+
+module.exports = MyInstance;
+
 },{}]},{},[]);

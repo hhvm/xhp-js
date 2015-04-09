@@ -1,8 +1,8 @@
 function XHPJS(instances, calls) {
   this.instances = [];
 
-  instances.forEach(this.constructInstance);
-  calls.forEach(this.call);
+  instances.forEach(this.constructInstance.bind(this));
+  calls.forEach(this.call.bind(this));
 }
 
 XHPJS.prototype = {
@@ -17,21 +17,22 @@ XHPJS.prototype = {
   },
 
   constructInstance: function(data) {
-    var elementID = data[0];
+    var elementId = data[0];
     var module = data[1];
     var args = data[2];
 
-    var element = document.getElementByID(elementID);
+    var element = document.getElementById(elementId);
     module = require(module);
 
-    var constructor = function(args) {
+    var XHPJSInstance = function(args) {
       return module.apply(this, args);
     }
 
-    constructor.prototype = module.prototype;
+    XHPJSInstance.prototype = module.prototype;
 
     args.unshift(element);
-    var instance = new constructor(args);
-    this.instances[elementID] = instance;
+    var instance = new XHPJSInstance(args);
+    console.log(this);
+    this.instances[elementId] = instance;
   }
 }

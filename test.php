@@ -40,6 +40,17 @@ trait XHPJS {
     $calls[] = Vector { $module, $method, $args };
   }
 
+}
+
+interface HasXHPJSInstance {
+  require extends :x:element;
+
+  public function getID(): string;
+}
+
+trait XHPJSInstance implements HasXHPJSInstance {
+  require implements HasXHPHelpers;
+
   protected function constructJSInstance(string $module, ...$args): void {
     $instances = $this->getContext(':x:js-scope/instances', null);
     invariant(
@@ -54,6 +65,7 @@ trait XHPJS {
 class :test extends :x:element {
   use XHPJS;
   use XHPHelpers;
+  use XHPJSInstance;
 
   attribute :xhp:html-element;
 
