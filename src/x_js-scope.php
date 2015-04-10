@@ -14,7 +14,7 @@ class :x:js-scope extends :x:element implements XHPAwaitable {
       <x:frag>
         {$this->getChildren()}
         <script>
-          var XHPJS = require('XHPJS');
+          var XHPJS = window.XHPJS ? window.XHPJS : require('XHPJS');
           new XHPJS(
             {json_encode($instances)},
             {json_encode($calls)}

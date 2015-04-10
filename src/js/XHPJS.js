@@ -22,7 +22,7 @@ XHPJS.prototype = {
     var method = data[1];
     var args = this.mapArguments(data[2]);
 
-    module = require(module);
+    module = window[module] ? window[module] : require(module);
     method = module[method];
     method.apply(null, args);
   },
@@ -64,7 +64,7 @@ XHPJS.prototype = {
     var moduleName = data[1];
     var args = this.mapArguments(data[2]);
 
-    var module = require(moduleName);
+    var module = window[moduleName] ? window[moduleName] : require(moduleName);
 
     var XHPJSInstance = function(args) {
       return module.apply(this, args);
