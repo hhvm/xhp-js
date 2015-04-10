@@ -7,7 +7,7 @@
     "build": "npm run build:dev && npm run build:minified && npm run build:example",
     "build:dev": "browserify -r XHPJS -x react -o xhpjs-dev.js",
     "build:minified": "browserify -g uglifyify -r XHPJS -x react -o xhpjs-minified.js",
-    "build:example": "browserify -x XHPJS -r react -r MyJSController -r MyJSModule -r MyReactClass -o example/bundle.js"
+    "build:example": "browserify -r XHPJS -r react -r MyJSController -r MyJSModule -r MyReactClass -o example/bundle.js"
   },
   "repository": {
     "type": "git",
