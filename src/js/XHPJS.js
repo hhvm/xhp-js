@@ -81,3 +81,5 @@ XHPJS.prototype = {
     this.instances[elementId] = instance;
   }
 }
+
+module.exports = XHPJS;

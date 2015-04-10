@@ -10,7 +10,7 @@ abstract final class XHPJS {
   }
 
   public static function MapArgument(mixed $argument): array<mixed> {
-    if (is_scalar($argument)) {
+    if (is_scalar($argument) || $argument instanceof Traversable) {
       return ['v', $argument];
     }
     if ($argument instanceof XHPJSElementRef) {
