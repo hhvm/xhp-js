@@ -1,6 +1,8 @@
 <?hh
 
 require_once('vendor/autoload.php');
+require_once('src/map_arguments.php');
+require_once('src/element.php');
 
 class :x:js-scope extends :x:element implements XHPAwaitable {
   use XHPAsync;
@@ -37,7 +39,7 @@ trait XHPJS {
       $calls instanceof Vector,
       "Can not use jsCall unless :x:js-scope is an ancestor in the tree"
     );
-    $calls[] = Vector { $module, $method, $args };
+    $calls[] = Vector { $module, $method, XHP\JS\map_arguments($args) };
   }
 
 }
@@ -58,7 +60,7 @@ trait XHPJSInstance implements HasXHPJSInstance {
       "Can not use constructJSInstance unless :x:js-scope is an ancestor in ".
       "tree"
     );
-    $instances[] = Vector { $this->getID(), $module, $args };
+    $instances[] = Vector { $this->getID(), $module, XHP\JS\map_arguments($args) };
   }
 }
 
@@ -71,7 +73,7 @@ class :test extends :x:element {
 
   protected function render(): XHPRoot {
     $this->jsCall('Herp', 'Derp', 'hello, world.');
-    $this->constructJSInstance('MyInstance', 'herp derp');
+    $this->constructJSInstance('MyInstance', XHP\JS\element($this), 'herp derp');
     return <div id={$this->getID()}>In :test::render()</div>;
   }
 }
