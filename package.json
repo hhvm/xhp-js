@@ -21,7 +21,6 @@
   },
   "browser": {
     "XHPJS": "./src/js/XHPJS.js",
-    "XHPReact": "./src/js/XHPReact.js",
 
     "MyJSController": "./example/MyJSController.js",
     "MyJSModule": "./example/MyJSModule.js",
@@ -37,10 +36,10 @@
   "scripts": {
     "build": "npm run build:dev && npm run build:minified && npm run build:example",
     "build:dev":
-      "browserify -r XHPJS -r XHPReact -o xhpjs-dev.js",
+      "browserify -r XHPJS -o xhpjs-dev.js",
     "build:minified":
-      "browserify -g uglifyify -r XHPJS -r XHPReact -o xhpjs-minified.js",
+      "browserify -g uglifyify -r XHPJS -o xhpjs-minified.js",
     "build:example":
-      "browserify -x XHPJS -x XHPReact -r MyJSController -r MyJSModule -r MyReactClass -o example/bundle.js"
+      "browserify -x XHPJS -r MyJSController -r MyJSModule -r MyReactClass -o example/bundle.js"
   }
 }

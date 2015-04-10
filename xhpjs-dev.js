@@ -86,21 +86,15 @@ XHPJS.prototype = {
   }
 }
 
-module.exports = XHPJS;
+XHPJS.renderReactElement = function(domElement, module, attributes) {
+  var React = window.React ? window.React : require('react');
 
-
-},{}],"XHPReact":[function(require,module,exports){
-var React = window.React ? window.React : require('react');
-
-var XHPReact = {
-  renderElement: function(domElement, module, attributes) {
-    var component = require(module);
-    var reactElement = React.createElement(component, attributes, null);
-    React.render(reactElement, domElement);
-  }
+  var component = require(module);
+  var reactElement = React.createElement(component, attributes, null);
+  React.render(reactElement, domElement);
 }
 
-module.exports = XHPReact;
+module.exports = XHPJS;
 
 
 },{"react":1}]},{},[]);

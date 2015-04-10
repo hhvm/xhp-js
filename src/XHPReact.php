@@ -9,8 +9,8 @@ trait XHPReact {
     Map<string, mixed> $attributes,
   ) {
     $this->jsCall(
-      'XHPReact',
-      'renderElement',
+      'XHPJS',
+      'renderReactElement',
       XHPJS::Element($this),
       $module,
       $attributes,

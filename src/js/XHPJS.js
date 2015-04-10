@@ -82,4 +82,12 @@ XHPJS.prototype = {
   }
 }
 
+XHPJS.renderReactElement = function(domElement, module, attributes) {
+  var React = window.React ? window.React : require('react');
+
+  var component = require(module);
+  var reactElement = React.createElement(component, attributes, null);
+  React.render(reactElement, domElement);
+}
+
 module.exports = XHPJS;
