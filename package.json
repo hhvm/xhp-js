@@ -1,9 +1,13 @@
 {
-  "name": "xhp-js",
+  "name": "XHPJS",
   "version": "0.0.1",
-  "description": "",
+  "description": "Easily create JS controllers for XHP elements, and XHP wrappers for React elements",
+  "main": "./src/js/XHPJS.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "npm run build:dev && npm run build:minified && npm run build:example",
+    "build:dev": "browserify -r XHPJS -x react -o xhpjs-dev.js",
+    "build:minified": "browserify -g uglifyify -r XHPJS -x react -o xhpjs-minified.js",
+    "build:example": "browserify -x XHPJS -r react -r MyJSController -r MyJSModule -r MyReactClass -o example/bundle.js"
   },
   "repository": {
     "type": "git",
@@ -14,32 +18,20 @@
   "bugs": {
     "url": "https://github.com/hhvm/xhp-js/issues"
   },
-  "dependencies": {
+  "devDependencies": {
     "browserify": "~9.0.8",
     "uglifyify": "~3.0.1",
-    "reactify": "~1.1.0"
+    "reactify": "~1.1.0",
+    "react": "~0.13.1"
   },
   "browser": {
-    "XHPJS": "./src/js/XHPJS.js",
-
     "MyJSController": "./example/MyJSController.js",
     "MyJSModule": "./example/MyJSModule.js",
-    "MyReactClass": "./example/MyReactClass.js",
-
-    "react": false
+    "MyReactClass": "./example/MyReactClass.js"
   },
   "browserify": {
     "transform": [
       "reactify"
     ]
-  },
-  "scripts": {
-    "build": "npm run build:dev && npm run build:minified && npm run build:example",
-    "build:dev":
-      "browserify -r XHPJS -o xhpjs-dev.js",
-    "build:minified":
-      "browserify -g uglifyify -r XHPJS -o xhpjs-minified.js",
-    "build:example":
-      "browserify -x XHPJS -r MyJSController -r MyJSModule -r MyReactClass -o example/bundle.js"
   }
 }

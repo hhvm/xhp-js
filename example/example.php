@@ -66,7 +66,6 @@ class :react-test extends :x:element {
 $xhp = 
   <html>
     <head>
-      <script src="https://fb.me/react-0.13.1.js"></script>
       <script src="xhpjs-dev.js"></script>
       <script src="bundle.js"></script>
     </head>
