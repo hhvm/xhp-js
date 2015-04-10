@@ -1,6 +1,6 @@
 <?hh
 
-require_once('vendor/autoload.php');
+require_once(__DIR__.'/../vendor/autoload.php');
 
 class :test extends :x:element {
   use XHPHelpers;
@@ -66,6 +66,8 @@ class :react-test extends :x:element {
 $xhp = 
   <html>
     <head>
+      <script src="https://fb.me/react-0.13.1.js"></script>
+      <script src="xhpjs-dev.js"></script>
       <script src="bundle.js"></script>
     </head>
     <body>

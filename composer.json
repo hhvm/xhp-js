@@ -4,5 +4,10 @@
   },
   "autoload": {
     "classmap": ["src/"]
+  },
+  "scripts": {
+    "post-install-cmd": [
+      "npm install && npm run build"
+    ]
   }
 }

@@ -1,0 +1,46 @@
+{
+  "name": "xhp-js",
+  "version": "0.0.1",
+  "description": "",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/hhvm/xhp-js.git"
+  },
+  "author": "Fred Emmott",
+  "license": "BSD-3-Clause",
+  "bugs": {
+    "url": "https://github.com/hhvm/xhp-js/issues"
+  },
+  "dependencies": {
+    "browserify": "~9.0.8",
+    "uglifyify": "~3.0.1",
+    "reactify": "~1.1.0"
+  },
+  "browser": {
+    "XHPJS": "./src/js/XHPJS.js",
+    "XHPReact": "./src/js/XHPReact.js",
+
+    "MyJSController": "./example/MyJSController.js",
+    "MyJSModule": "./example/MyJSModule.js",
+    "MyReactClass": "./example/MyReactClass.js",
+
+    "react": false
+  },
+  "browserify": {
+    "transform": [
+      "reactify"
+    ]
+  },
+  "scripts": {
+    "build": "npm run build:dev && npm run build:minified && npm run build:example",
+    "build:dev":
+      "browserify -r XHPJS -r XHPReact -o xhpjs-dev.js",
+    "build:minified":
+      "browserify -g uglifyify -r XHPJS -r XHPReact -o xhpjs-minified.js",
+    "build:example":
+      "browserify -x XHPJS -x XHPReact -r MyJSController -r MyJSModule -r MyReactClass -o example/bundle.js"
+  }
+}
