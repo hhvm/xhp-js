@@ -2,6 +2,8 @@
 
 require_once(__DIR__.'/../vendor/autoload.php');
 
+const USE_BROWSERIFY = true;
+
 class :test extends :x:element {
   use XHPHelpers;
   use XHPJSCall;
@@ -63,10 +65,30 @@ class :react-test extends :x:element {
   }
 }
 
+$script = null;
+if (USE_BROWSERIFY) {
+  // We recommend using npm and browserify...
+  $script = <script src="build/bundle.js" />;
+} else {
+  // ... but you don't have to :)
+  $script =
+    <x:frag>
+      <script src="http://fb.me/react-0.13.1.js" />
+
+      <script src="js/XHPJS.js" />
+
+      <script src="js/MyJSModule.js" />
+      <script src="js/MyJSController.js" />
+
+      <!-- src/MyReactClass.js contains JSX -->
+      <script src="build/MyReactClass.js" />
+    </x:frag>;
+}
+
 $xhp = 
   <html>
     <head>
-      <script src="bundle.js"></script>
+      {$script}
     </head>
     <body>
       <x:js-scope>

@@ -1,4 +1,3 @@
-require=(function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({"XHPJS":[function(require,module,exports){
 function XHPJS(instances, calls) {
   this.instanceData = {};
   this.instances = {};
@@ -23,7 +22,7 @@ XHPJS.prototype = {
     var method = data[1];
     var args = this.mapArguments(data[2]);
 
-    module = require(module);
+    module = window[module] ? window[module] : require(module);
     method = module[method];
     method.apply(null, args);
   },
@@ -65,7 +64,7 @@ XHPJS.prototype = {
     var moduleName = data[1];
     var args = this.mapArguments(data[2]);
 
-    var module = require(moduleName);
+    var module = window[moduleName] ? window[moduleName] : require(moduleName);
 
     var XHPJSInstance = function(args) {
       return module.apply(this, args);
@@ -86,12 +85,13 @@ XHPJS.prototype = {
 XHPJS.renderReactElement = function(domElement, module, attributes) {
   var React = window.React ? window.React : require('react');
 
-  var component = require(module);
+  var component = window[module] ? window[module] : require(module);
   var reactElement = React.createElement(component, attributes, null);
   React.render(reactElement, domElement);
 }
 
-module.exports = XHPJS;
-
-
-},{"react":"react"}]},{},[]);
+if (typeof module != 'undefined' ) {
+  module.exports = XHPJS;
+} else {
+  window.XHPJS = XHPJS;
+}

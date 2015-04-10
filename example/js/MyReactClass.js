@@ -10,4 +10,8 @@ var MyReactClass = React.createClass({
   }
 });
 
-module.exports = MyReactClass;
+if (typeof module != 'undefined') {
+  module.exports = MyReactClass;
+} else {
+  window.MyReactClass = MyReactClass;
+}

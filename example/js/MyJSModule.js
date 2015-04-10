@@ -5,4 +5,8 @@ var MyJSModule = {
   }
 }
 
-module.exports = MyJSModule;
+if (typeof module != 'undefined') {
+  module.exports = MyJSModule;
+} else {
+  window.MyJSModule = MyJSModule;
+}
