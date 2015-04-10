@@ -29,9 +29,8 @@ class :x:js-scope extends :x:element implements XHPAwaitable {
 }
 
 
-trait XHPJS {
+trait XHPJSCall {
   require extends :x:element;
-  require implements HasXHPHelpers;
 
   protected function jsCall(string $module, string $method, ...$args): void {
     $calls = $this->getContext(':x:js-scope/calls', null);
@@ -65,8 +64,8 @@ trait XHPJSInstance implements HasXHPJSInstance {
 }
 
 class :test extends :x:element {
-  use XHPJS;
   use XHPHelpers;
+  use XHPJSCall;
   use XHPJSInstance;
 
   attribute :xhp:html-element;
