@@ -49,12 +49,15 @@ class :react-test extends :x:element {
   use XHPHelpers;
   use XHPReact;
 
-  attribute :xhp:html-element;
+  attribute
+    :xhp:html-element,
+    string some-attribute @required;
 
   protected function render(): XHPRoot {
+    // Self-explanatory :)
     $this->constructReactInstance(
       'MyReactClass',
-      Map {'someAttribute' => 'some value'},
+      Map {'someAttribute' => $this->:some-attribute }
     );
     return <div id={$this->getID()} />;
   }
@@ -68,7 +71,7 @@ $xhp =
     <body>
       <x:js-scope>
         <test />
-        <react-test />
+        <react-test some-attribute="some value" />
       </x:js-scope>
     </body>
   </html>;
