@@ -1,8 +1,6 @@
 <?hh
 
-namespace XHP\JS;
-
-class ElementRef {
+class XHPJSElementRef {
 
   public function __construct(private \HasXHPHelpers $element) {
   }
@@ -10,8 +8,4 @@ class ElementRef {
   public function getElementID(): string {
     return $this->element->getID();
   }
-}
-
-function element(\HasXHPHelpers $element): ElementRef {
-  return new ElementRef($element);
 }
