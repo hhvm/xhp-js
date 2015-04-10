@@ -10,8 +10,37 @@ class :test extends :x:element {
   attribute :xhp:html-element;
 
   protected function render(): XHPRoot {
-    $this->jsCall('Herp', 'Derp', 'hello, world.', XHPJS::Instance($this));
-    $this->constructJSInstance('MyInstance', XHPJS::Element($this), 'herp derp');
+    /* Roughly equivalent to:
+     *
+     * var MyJSModule = require('MyJSModule');
+     * MyJSModule.myJSFunction(
+     *  'hello, world',
+     *  <result of constructJSInstance() call below>
+     * );
+     *
+     * The JS code realizes it needs to construct the JS class first, despite
+     * the call below.
+     */
+    $this->jsCall(
+      'MyJSModule',
+      'myJSFunction',
+      'hello, world.',
+      XHPJS::Instance($this)
+    );
+
+    /*
+     * var MyJSController = require('MyJSController');
+     * new MyJSController(
+     *   document.getElementById(< $this->getID() >);
+     *   'herp derp'
+     * );
+     */
+    $this->constructJSInstance(
+      'MyJSController',
+      XHPJS::Element($this),
+      'herp derp',
+    );
+
     return <div id={$this->getID()}>In :test::render()</div>;
   }
 }
