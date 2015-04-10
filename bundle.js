@@ -19840,7 +19840,7 @@ module.exports = XHPJS;
 
 
 },{}],"XHPReact":[function(require,module,exports){
-var React = require('react');
+var React = window.React ? window.React : require('react');
 
 var XHPReact = {
   renderElement: function(domElement, module, attributes) {
