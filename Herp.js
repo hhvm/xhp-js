@@ -1,5 +1,6 @@
 var Herp = {
-  Derp: function(message) {
+  Derp: function(message, instance) {
+    console.log(instance);
     alert('In HerpDerp:' + message);
   }
 }

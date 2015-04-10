@@ -61,10 +61,10 @@ XHPJS.prototype = {
 
   constructInstance: function(elementId) {
     var data = this.instanceData[elementId];
-    var module = data[1];
+    var moduleName = data[1];
     var args = this.mapArguments(data[2]);
 
-    module = require(module);
+    var module = require(moduleName);
 
     var XHPJSInstance = function(args) {
       return module.apply(this, args);
@@ -73,7 +73,11 @@ XHPJS.prototype = {
     XHPJSInstance.prototype = module.prototype;
 
     var instance = new XHPJSInstance(args);
-    console.log(this);
+
+    // Handy for debugging :)
+    instance.__xhpJSModule = moduleName;
+    instance.__xhpJSElement = this.getElement(elementId);
+
     this.instances[elementId] = instance;
   }
 }

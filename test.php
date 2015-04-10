@@ -10,7 +10,7 @@ class :test extends :x:element {
   attribute :xhp:html-element;
 
   protected function render(): XHPRoot {
-    $this->jsCall('Herp', 'Derp', 'hello, world.');
+    $this->jsCall('Herp', 'Derp', 'hello, world.', XHPJS::Instance($this));
     $this->constructJSInstance('MyInstance', XHPJS::Element($this), 'herp derp');
     return <div id={$this->getID()}>In :test::render()</div>;
   }
