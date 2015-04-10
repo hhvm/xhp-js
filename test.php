@@ -1,8 +1,6 @@
 <?hh
 
 require_once('vendor/autoload.php');
-require_once('src/XHPJSElementRef.php');
-require_once('src/XHPJS.php');
 
 class :x:js-scope extends :x:element implements XHPAwaitable {
   use XHPAsync;

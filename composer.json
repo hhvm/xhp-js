@@ -1,5 +1,8 @@
 {
   "require": {
     "facebook/xhp-lib": "~2.0.0"
+  },
+  "autoload": {
+    "classmap": ["src/"]
   }
 }
