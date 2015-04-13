@@ -88,6 +88,8 @@ class :example:typeahead extends :x:element implements XHPAwaitable {
       'ReactTypeahead',
       Map { 'friends' => $friend_names },
     );
+    
+    return <div id={$this->getID()} />;
   }
 }
 
