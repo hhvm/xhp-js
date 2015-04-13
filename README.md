@@ -97,12 +97,6 @@ print
   </body></html>;
 ```
 
-## Installation
-
-We recommend installing XHP-JS with Composer (for the Hack code) and npm +
-Browserify for the Javascript code. Alternatively, you can include XHPJS.js or
-XHPJS.min.js directly to declare an XHPJS object in the global scope.
-
 ## Writing your JavaScript
 
 We recommend writing your modules as CommonJS modules, and using Browserify.
@@ -121,14 +115,14 @@ $this->jsCall('MyModule', 'myMethod', 'argument');
 
 This Hack code can be thought of as creating the following Javascript:
 
-```
+```Javascript
 var module = window.MyModule ? window.MyModule : require('MyModule');
 module.myMethod('argument');
 ```
 
 In turn, your JavaScript may look like:
 
-```
+```Javascript
 var MyModule = {
   myFunction: function() {
     // ...
@@ -138,6 +132,12 @@ var MyModule = {
 module.exports = MyModule; // if using CommonJS + Browserify
 window.MyModule = MyModule; // if not
 ```
+
+## Installation
+
+We recommend installing XHP-JS with Composer (for the Hack code) and npm +
+Browserify for the Javascript code. Alternatively, you can include XHPJS.js or
+XHPJS.min.js directly to declare an XHPJS object in the global scope.
 
 ## License
 XHP-JS is BSD-licensed. We also provide an additional patent grant.
