@@ -1,23 +1,23 @@
 {
     "_readme": [
         "This file locks the dependencies of your project to a known state",
-        "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "be75911e611e8d2fc44c97491232a671",
+    "hash": "0e17bf2e64ab38349e6234ddeadbcd46",
     "packages": [
         {
             "name": "facebook/xhp-lib",
-            "version": "2.0.0",
+            "version": "2.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/facebook/xhp-lib.git",
-                "reference": "34aac8d284fee468378b33988e62a699b514227b"
+                "reference": "45e4542d0fcaa3dfe39bf33e81ec4e1ff520b0a6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/facebook/xhp-lib/zipball/34aac8d284fee468378b33988e62a699b514227b",
-                "reference": "34aac8d284fee468378b33988e62a699b514227b",
+                "url": "https://api.github.com/repos/facebook/xhp-lib/zipball/45e4542d0fcaa3dfe39bf33e81ec4e1ff520b0a6",
+                "reference": "45e4542d0fcaa3dfe39bf33e81ec4e1ff520b0a6",
                 "shasum": ""
             },
             "require": {
@@ -50,7 +50,7 @@
                 "hhvm",
                 "xhp"
             ],
-            "time": "2015-04-06 16:53:37"
+            "time": "2015-05-14 21:47:55"
         }
     ],
     "packages-dev": [],
