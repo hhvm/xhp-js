@@ -138,8 +138,8 @@ window.MyModule = MyModule; // if not
 ## Installation
 
 We recommend installing XHP-JS with Composer (for the Hack code) and npm +
-Browserify for the Javascript code. Alternatively, you can include XHPJS.js or
-XHPJS.min.js directly to declare an XHPJS object in the global scope.
+Browserify for the Javascript code. Alternatively, you can include xhpjs.js or
+xhpjs.min.js directly to declare an XHPJS object in the global scope.
 
 ## License
 XHP-JS is BSD-licensed. We also provide an additional patent grant.

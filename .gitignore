@@ -2,4 +2,5 @@
 vendor/
 npm-debug.log
 node_modules/*
-!node_modules/XHPJS
+!node_modules/xhpjs
+www.pid

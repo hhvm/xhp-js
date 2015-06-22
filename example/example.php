@@ -83,7 +83,7 @@ if (USE_BROWSERIFY) {
     <x:frag>
       <script src="http://fb.me/react-0.13.1.js" />
 
-      <script src="js/XHPJS.js" />
+      <script src="js/xhpjs.js" />
 
       <script src="js/MyJSModule.js" />
       <script src="js/MyJSController.js" />

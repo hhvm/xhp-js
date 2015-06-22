@@ -16,13 +16,24 @@ class :x:js-scope extends :x:element implements XHPAwaitable {
     $instances = Vector { };
     $this->setContext(':x:js-scope/calls', $calls);
     $this->setContext(':x:js-scope/instances', $instances);
-    await $this->__flushElementChildren();
+
+    $child_waithandles = Vector { };
+    foreach ($this->getChildren() as $child) {
+      if ($child instanceof :x:composable-element) {
+        $child->__transferContext($this->getAllContexts());
+        $child_waithandles[] = (async () ==> await $child->__flushSubtree())();
+      } else {
+        invariant_violation(gettype($child).' is not an :x:composable-element');
+      }
+    }
+    $children = await HH\Asio\v($child_waithandles);
+    $this->replaceChildren();
 
     return
       <x:frag>
-        {$this->getChildren()}
+        {$children}
         <script>
-          var XHPJS = window.XHPJS ? window.XHPJS : require('XHPJS');
+          var XHPJS = window.XHPJS ? window.XHPJS : require('xhpjs');
           new XHPJS(
             {json_encode($instances)},
             {json_encode($calls)}

@@ -1,13 +1,13 @@
 {
-  "name": "XHPJS",
+  "name": "xhpjs",
   "version": "0.0.1",
   "description": "Easily create JS controllers for XHP elements, and XHP wrappers for React elements",
-  "main": "XHPJS.js",
+  "main": "xhpjs.js",
   "scripts": {
     "build": "npm run build:example && npm run build:min",
-    "build:min": "uglify -s XHPJS.js -o XHPJS.min.js",
+    "build:min": "uglify -s xhpjs.js -o xhpjs.min.js",
     "build:example": "npm run build:exampleBundle && npm run build:exampleJSX",
-    "build:exampleBundle": "browserify -r XHPJS -r react -r MyJSController -r MyJSModule -r MyReactClass -o example/build/bundle.js",
+    "build:exampleBundle": "browserify -r xhpjs -r react -r MyJSController -r MyJSModule -r MyReactClass -o example/build/bundle.js",
     "build:exampleJSX": "jsx example/js/ example/build/"
   },
   "repository": {
