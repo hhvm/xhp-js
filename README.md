@@ -9,6 +9,8 @@ For convenience, an interface to construct React components is also included.
 
 ## Examples
 
+A full example is available at https://github.com/hhvm/xhp-js-example
+
 ### Calling a Javascript function
 
 ```Hack
@@ -140,6 +142,8 @@ window.MyModule = MyModule; // if not
 We recommend installing XHP-JS with Composer (for the Hack code) and npm +
 Browserify for the Javascript code. Alternatively, you can include xhpjs.js or
 xhpjs.min.js directly to declare an XHPJS object in the global scope.
+
+See https://github.com/hhvm/xhp-js-example for a full example.
 
 ## License
 XHP-JS is BSD-licensed. We also provide an additional patent grant.
