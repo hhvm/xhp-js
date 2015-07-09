@@ -7,6 +7,8 @@ Javascript code.
 
 For convenience, an interface to construct React components is also included.
 
+A short overview is available at https://code.facebook.com/posts/858739974205250
+
 ## Examples
 
 A full example is available at https://github.com/hhvm/xhp-js-example
