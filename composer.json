@@ -6,7 +6,7 @@
   "license": ["BSD-3-Clause"],
   "require": {
     "facebook/xhp-lib": "~2.2.0",
-    "hhvm": "~3.6.0"
+    "hhvm": "~3.6"
   },
   "autoload": {
     "classmap": ["src/"]
