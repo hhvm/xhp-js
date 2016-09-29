@@ -5,7 +5,7 @@
   "homepage": "https://github.com/hhvm/xhp-js",
   "license": ["BSD-3-Clause"],
   "require": {
-    "facebook/xhp-lib": "~2.2.0",
+    "facebook/xhp-lib": "^2.2.0",
     "hhvm": "~3.6"
   },
   "autoload": {
