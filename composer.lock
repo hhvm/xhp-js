@@ -4,28 +4,29 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "262a8ec5bf416315318df12bcc881a04",
+    "content-hash": "72ba6d9aa73843cb48d768c71e2d7a19",
     "packages": [
         {
             "name": "facebook/xhp-lib",
-            "version": "2.2.0",
+            "version": "v2.3.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/facebook/xhp-lib.git",
-                "reference": "45e4542d0fcaa3dfe39bf33e81ec4e1ff520b0a6"
+                "reference": "4d2e2640534f50debe04f6a398db064fa6b1bb72"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/facebook/xhp-lib/zipball/45e4542d0fcaa3dfe39bf33e81ec4e1ff520b0a6",
-                "reference": "45e4542d0fcaa3dfe39bf33e81ec4e1ff520b0a6",
+                "url": "https://api.github.com/repos/facebook/xhp-lib/zipball/4d2e2640534f50debe04f6a398db064fa6b1bb72",
+                "reference": "4d2e2640534f50debe04f6a398db064fa6b1bb72",
                 "shasum": ""
             },
             "require": {
-                "hhvm": "*"
+                "fredemmott/type-assert": "^0.2.0 || ^1.0",
+                "hhvm": "~3.12"
             },
             "require-dev": {
-                "91carriage/phpunit-hhi": "4.5.*",
-                "phpunit/phpunit": "4.5.*"
+                "91carriage/phpunit-hhi": "^5.1.0",
+                "phpunit/phpunit": "^5.1.0"
             },
             "type": "library",
             "extra": {
@@ -50,7 +51,45 @@
                 "hhvm",
                 "xhp"
             ],
-            "time": "2015-05-14 21:47:55"
+            "time": "2016-12-04T21:31:50+00:00"
+        },
+        {
+            "name": "fredemmott/type-assert",
+            "version": "v1.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/fredemmott/type-assert.git",
+                "reference": "38460b438ca85701585abe471d944c678d242847"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/fredemmott/type-assert/zipball/38460b438ca85701585abe471d944c678d242847",
+                "reference": "38460b438ca85701585abe471d944c678d242847",
+                "shasum": ""
+            },
+            "require": {
+                "hhvm": "~3.12"
+            },
+            "require-dev": {
+                "91carriage/phpunit-hhi": "~5.1",
+                "phpunit/phpunit": "~5.1"
+            },
+            "type": "library",
+            "autoload": {
+                "classmap": [
+                    "src/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "ISC"
+            ],
+            "description": "Convert untyped data to typed data",
+            "keywords": [
+                "TypeAssert",
+                "hack"
+            ],
+            "time": "2017-02-15T02:26:23+00:00"
         }
     ],
     "packages-dev": [],
