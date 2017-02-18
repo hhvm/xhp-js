@@ -23,7 +23,10 @@ class :x:js-scope extends :x:element implements XHPAwaitable {
         $child->__transferContext($this->getAllContexts());
         $child_waithandles[] = (async () ==> await $child->__flushSubtree())();
       } else {
-        invariant_violation(gettype($child).' is not an :x:composable-element');
+        invariant_violation(
+          '%s is not an :x:composable-element',
+          is_object($child) ? get_class($child) : gettype($child),
+        );
       }
     }
     $children = await HH\Asio\v($child_waithandles);
