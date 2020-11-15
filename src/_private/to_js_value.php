@@ -10,7 +10,7 @@
 
 namespace _Private;
 
-use namespace Facebook\XHP\Core as x;
+use namespace /*HHAST_IGNORE_ERROR[UseStatementWithAs]*/ Facebook\XHP\Core as x;
 
 function to_js_value(mixed $argument): (string, mixed) {
   // This check is a best effort.

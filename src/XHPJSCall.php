@@ -8,7 +8,7 @@
  * of patent rights can be found in the PATENTS file in the same directory.
  */
 
-use namespace Facebook\XHP\Core as x;
+use namespace /*HHAST_IGNORE_ERROR[UseStatementWithAs]*/ Facebook\XHP\Core as x;
 use namespace HH\Lib\Vec;
 use type Facebook\XHP\HTML\HasXHPHTMLHelpers;
 
@@ -19,7 +19,7 @@ trait XHPJSCall {
     $calls = $this->getContext('x_js_scope/calls', null);
     invariant(
       $calls is ScriptDataList,
-      "Can not use jsCall unless x_js_scope is an ancestor in the tree"
+      'Can not use jsCall unless x_js_scope is an ancestor in the tree'
     );
     $calls->append(tuple($module, $method, Vec\map($args, $arg ==> _Private\to_js_value($arg))));
   }

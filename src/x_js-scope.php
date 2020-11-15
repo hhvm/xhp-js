@@ -8,11 +8,12 @@
  * of patent rights can be found in the PATENTS file in the same directory.
  */
 
-use namespace Facebook\XHP\Core as x;
+use namespace /*HHAST_IGNORE_ERROR[UseStatementWithAs]*/ Facebook\XHP\Core as x;
 use type Facebook\XHP\HTML\script;
 use namespace HH\Lib\Vec;
 
 xhp class x_js_scope extends x\element {
+  <<__Override>>
   protected async function renderAsync(): Awaitable<x\node> {
     $calls = new ScriptDataList();
     $instances = new ScriptDataList();

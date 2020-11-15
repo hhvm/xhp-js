@@ -8,7 +8,7 @@
  * of patent rights can be found in the PATENTS file in the same directory.
  */
 
-use namespace Facebook\XHP\Core as x;
+use namespace /*HHAST_IGNORE_ERROR[UseStatementWithAs]*/ Facebook\XHP\Core as x;
 use type Facebook\XHP\HTML\HasXHPHTMLHelpers;
 use namespace HH\Lib\Vec;
 
@@ -25,8 +25,7 @@ trait XHPJSInstance implements HasXHPJSInstance {
     $instances = $this->getContext('x_js_scope/instances', null);
     invariant(
       $instances is ScriptDataList,
-      "Can not use constructJSInstance unless x_js_scope is an ancestor in ".
-      "tree"
+      'Can not use constructJSInstance unless x_js_scope is an ancestor in tree'
     );
     $instances->append(tuple($this->getID(), $module, Vec\map($args, $arg ==> _Private\to_js_value($arg))));
   }
