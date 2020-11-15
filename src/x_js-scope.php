@@ -13,8 +13,8 @@ use type Facebook\XHP\HTML\script;
 
 xhp class x_js_scope extends x\element {
   protected async function renderAsync(): Awaitable<x\node> {
-    $calls = Vector { };
-    $instances = Vector { };
+    $calls = new ScriptDataList();
+    $instances = new ScriptDataList();
     $this->setContext(':x:js-scope/calls', $calls);
     $this->setContext(':x:js-scope/instances', $instances);
 

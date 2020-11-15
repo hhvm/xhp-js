@@ -23,10 +23,10 @@ trait XHPJSInstance implements HasXHPJSInstance {
   protected function constructJSInstance(string $module, mixed ...$args): void {
     $instances = $this->getContext(':x:js-scope/instances', null);
     invariant(
-      $instances is Vector<_>,
+      $instances is ScriptDataList,
       "Can not use constructJSInstance unless :x:js-scope is an ancestor in ".
       "tree"
     );
-    $instances[] = Vector { $this->getID(), $module, XHPJS::MapArguments($args) };
+    $instances->append(tuple($this->getID(), $module, XHPJS::MapArguments($args)));
   }
 }

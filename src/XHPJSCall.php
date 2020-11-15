@@ -16,9 +16,9 @@ trait XHPJSCall {
   protected function jsCall(string $module, string $method, mixed ...$args): void {
     $calls = $this->getContext(':x:js-scope/calls', null);
     invariant(
-      $calls is Vector<_>,
+      $calls is ScriptDataList,
       "Can not use jsCall unless :x:js-scope is an ancestor in the tree"
     );
-    $calls[] = Vector { $module, $method, XHPJS::MapArguments($args) };
+    $calls->append(tuple($module, $method, XHPJS::MapArguments($args)));
   }
 }
