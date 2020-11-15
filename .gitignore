@@ -4,3 +4,5 @@ npm-debug.log
 node_modules/*
 !node_modules/xhpjs
 www.pid
+composer.lock
+.*.hhast.*cache
