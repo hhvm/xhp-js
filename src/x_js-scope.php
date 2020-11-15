@@ -19,7 +19,7 @@ class :x:js-scope extends :x:element implements XHPAwaitable {
 
     $child_waithandles = Vector { };
     foreach ($this->getChildren() as $child) {
-      if ($child instanceof :x:composable-element) {
+      if ($child is :x:composable-element) {
         $child->__transferContext($this->getAllContexts());
         $child_waithandles[] = (async () ==> await $child->__flushSubtree())();
       } else {

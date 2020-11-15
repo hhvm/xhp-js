@@ -20,7 +20,7 @@ trait XHPJSInstance implements HasXHPJSInstance {
   protected function constructJSInstance(string $module, ...$args): void {
     $instances = $this->getContext(':x:js-scope/instances', null);
     invariant(
-      $instances instanceof Vector,
+      $instances is Vector<_>,
       "Can not use constructJSInstance unless :x:js-scope is an ancestor in ".
       "tree"
     );
