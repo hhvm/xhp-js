@@ -14,5 +14,8 @@
     "post-install-cmd": [
       "npm install && npm run build"
     ]
+  },
+  "require-dev": {
+    "hhvm/hhast": "^4"
   }
 }
