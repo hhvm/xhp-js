@@ -10,6 +10,7 @@
 
 use namespace Facebook\XHP\Core as x;
 use type Facebook\XHP\HTML\script;
+use namespace HH\Lib\Vec;
 
 xhp class x_js_scope extends x\element {
   protected async function renderAsync(): Awaitable<x\node> {
@@ -18,10 +19,12 @@ xhp class x_js_scope extends x\element {
     $this->setContext(':x:js-scope/calls', $calls);
     $this->setContext(':x:js-scope/instances', $instances);
 
-    $child_waithandles = Vector { };
+    $child_waithandles = vec[];
     foreach ($this->getChildren() as $child) {
       if ($child is x\node) {
         $child->__transferContext($this->getAllContexts());
+        // Can't use Vec\map_async, since we want these Awaitables to start
+        // when the entire tree is x\node only and all contexts have been transferred.
         $child_waithandles[] = (async () ==> await $child->__flushSubtree())();
       } else {
         invariant_violation(
@@ -30,7 +33,7 @@ xhp class x_js_scope extends x\element {
         );
       }
     }
-    $children = await HH\Asio\v($child_waithandles);
+    $children = await Vec\from_async($child_waithandles);
     $this->replaceChildren();
 
     return
