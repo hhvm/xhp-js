@@ -14,10 +14,10 @@ trait XHPJSCall {
   require extends x\element;
 
   protected function jsCall(string $module, string $method, mixed ...$args): void {
-    $calls = $this->getContext(':x:js-scope/calls', null);
+    $calls = $this->getContext('x_js_scope/calls', null);
     invariant(
       $calls is ScriptDataList,
-      "Can not use jsCall unless :x:js-scope is an ancestor in the tree"
+      "Can not use jsCall unless x_js_scope is an ancestor in the tree"
     );
     $calls->append(tuple($module, $method, XHPJS::MapArguments($args)));
   }

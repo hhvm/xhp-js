@@ -21,10 +21,10 @@ trait XHPJSInstance implements HasXHPJSInstance {
   require implements HasXHPHTMLHelpers;
 
   protected function constructJSInstance(string $module, mixed ...$args): void {
-    $instances = $this->getContext(':x:js-scope/instances', null);
+    $instances = $this->getContext('x_js_scope/instances', null);
     invariant(
       $instances is ScriptDataList,
-      "Can not use constructJSInstance unless :x:js-scope is an ancestor in ".
+      "Can not use constructJSInstance unless x_js_scope is an ancestor in ".
       "tree"
     );
     $instances->append(tuple($this->getID(), $module, XHPJS::MapArguments($args)));

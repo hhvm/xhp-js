@@ -16,8 +16,8 @@ xhp class x_js_scope extends x\element {
   protected async function renderAsync(): Awaitable<x\node> {
     $calls = new ScriptDataList();
     $instances = new ScriptDataList();
-    $this->setContext(':x:js-scope/calls', $calls);
-    $this->setContext(':x:js-scope/instances', $instances);
+    $this->setContext('x_js_scope/calls', $calls);
+    $this->setContext('x_js_scope/instances', $instances);
 
     $child_waithandles = vec[];
     foreach ($this->getChildren() as $child) {
@@ -28,7 +28,7 @@ xhp class x_js_scope extends x\element {
         $child_waithandles[] = (async () ==> await $child->__flushSubtree())();
       } else {
         invariant_violation(
-          '%s is not an :x:composable-element',
+          '%s is not an x\node',
           is_object($child) ? get_class($child) : gettype($child),
         );
       }
