@@ -8,10 +8,11 @@
  * of patent rights can be found in the PATENTS file in the same directory.
  */
 
-class :x:js-scope extends :x:element implements XHPAwaitable {
-  use XHPAsync;
+use namespace Facebook\XHP\Core as x;
+use type Facebook\XHP\HTML\script;
 
-  protected async function asyncRender(): Awaitable<XHPRoot> {
+xhp class x_js_scope extends x\element {
+  protected async function renderAsync(): Awaitable<x\node> {
     $calls = Vector { };
     $instances = Vector { };
     $this->setContext(':x:js-scope/calls', $calls);
@@ -19,7 +20,7 @@ class :x:js-scope extends :x:element implements XHPAwaitable {
 
     $child_waithandles = Vector { };
     foreach ($this->getChildren() as $child) {
-      if ($child is :x:composable-element) {
+      if ($child is x\node) {
         $child->__transferContext($this->getAllContexts());
         $child_waithandles[] = (async () ==> await $child->__flushSubtree())();
       } else {

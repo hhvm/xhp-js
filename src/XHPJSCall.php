@@ -8,8 +8,10 @@
  * of patent rights can be found in the PATENTS file in the same directory.
  */
 
+use namespace Facebook\XHP\Core as x;
+
 trait XHPJSCall {
-  require extends :x:element;
+  require extends x\element;
 
   protected function jsCall(string $module, string $method, ...$args): void {
     $calls = $this->getContext(':x:js-scope/calls', null);

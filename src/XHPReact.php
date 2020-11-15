@@ -8,9 +8,11 @@
  * of patent rights can be found in the PATENTS file in the same directory.
  */
 
+use type Facebook\XHP\HTML\HasXHPHTMLHelpers;
+
 trait XHPReact {
   use XHPJSCall;
-  require implements HasXHPHelpers;
+  require implements HasXHPHTMLHelpers;
 
   protected function constructReactInstance(
     string $module,

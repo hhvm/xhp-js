@@ -9,9 +9,10 @@
  */
 
 use namespace HH\Lib\Vec;
+use type Facebook\XHP\HTML\HasXHPHTMLHelpers;
 
 abstract final class XHPJS {
-  public static function Element(HasXHPHelpers $element): XHPJSElementRef {
+  public static function Element(HasXHPHTMLHelpers $element): XHPJSElementRef {
     return new XHPJSElementRef($element);
   }
 

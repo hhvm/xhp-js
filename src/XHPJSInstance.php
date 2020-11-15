@@ -8,14 +8,17 @@
  * of patent rights can be found in the PATENTS file in the same directory.
  */
 
+use namespace Facebook\XHP\Core as x;
+use type Facebook\XHP\HTML\HasXHPHTMLHelpers;
+
 interface HasXHPJSInstance {
-  require extends :x:element;
+  require extends x\element;
 
   public function getID(): string;
 }
 
 trait XHPJSInstance implements HasXHPJSInstance {
-  require implements HasXHPHelpers;
+  require implements HasXHPHTMLHelpers;
 
   protected function constructJSInstance(string $module, ...$args): void {
     $instances = $this->getContext(':x:js-scope/instances', null);
