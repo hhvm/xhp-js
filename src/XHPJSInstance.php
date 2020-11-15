@@ -10,6 +10,7 @@
 
 use namespace Facebook\XHP\Core as x;
 use type Facebook\XHP\HTML\HasXHPHTMLHelpers;
+use namespace HH\Lib\Vec;
 
 interface HasXHPJSInstance {
   require extends x\element;
@@ -27,6 +28,10 @@ trait XHPJSInstance implements HasXHPJSInstance {
       "Can not use constructJSInstance unless x_js_scope is an ancestor in ".
       "tree"
     );
-    $instances->append(tuple($this->getID(), $module, XHPJS::MapArguments($args)));
+    $instances->append(tuple($this->getID(), $module, Vec\map($args, $arg ==> _Private\to_js_value($arg))));
+  }
+
+  protected function toJSInstanceRef(): XHPJSInstanceRef {
+    return new XHPJSInstanceRef($this);
   }
 }

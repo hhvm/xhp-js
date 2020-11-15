@@ -21,7 +21,7 @@ trait XHPReact {
     $this->jsCall(
       'XHPJS',
       'renderReactElement',
-      XHPJS::Element($this),
+      $this->toJSElementRef(),
       $module,
       $attributes,
     );

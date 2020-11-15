@@ -16,7 +16,6 @@ final class XHPJSElementRef {
   }
 
   public function getElementID(): string {
-    // UNSAFE: HasXHPHelpers should define 'getID' and so on :)
     return $this->element->getID();
   }
 }

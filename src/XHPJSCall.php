@@ -9,6 +9,8 @@
  */
 
 use namespace Facebook\XHP\Core as x;
+use namespace HH\Lib\Vec;
+use type Facebook\XHP\HTML\HasXHPHTMLHelpers;
 
 trait XHPJSCall {
   require extends x\element;
@@ -19,6 +21,11 @@ trait XHPJSCall {
       $calls is ScriptDataList,
       "Can not use jsCall unless x_js_scope is an ancestor in the tree"
     );
-    $calls->append(tuple($module, $method, XHPJS::MapArguments($args)));
+    $calls->append(tuple($module, $method, Vec\map($args, $arg ==> _Private\to_js_value($arg))));
+  }
+
+  protected function toJSElementRef(
+  ): XHPJSElementRef where this as HasXHPHTMLHelpers {
+    return new XHPJSElementRef($this as HasXHPHTMLHelpers);
   }
 }
