@@ -17,7 +17,7 @@ trait XHPReact {
   protected function constructReactInstance(
     string $module,
     Map<string, mixed> $attributes,
-  ) {
+  ): void {
     $this->jsCall(
       'XHPJS',
       'renderReactElement',

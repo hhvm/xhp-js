@@ -20,7 +20,7 @@ interface HasXHPJSInstance {
 trait XHPJSInstance implements HasXHPJSInstance {
   require implements HasXHPHTMLHelpers;
 
-  protected function constructJSInstance(string $module, ...$args): void {
+  protected function constructJSInstance(string $module, mixed ...$args): void {
     $instances = $this->getContext(':x:js-scope/instances', null);
     invariant(
       $instances is Vector<_>,

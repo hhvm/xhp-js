@@ -13,7 +13,7 @@ use namespace Facebook\XHP\Core as x;
 trait XHPJSCall {
   require extends x\element;
 
-  protected function jsCall(string $module, string $method, ...$args): void {
+  protected function jsCall(string $module, string $method, mixed ...$args): void {
     $calls = $this->getContext(':x:js-scope/calls', null);
     invariant(
       $calls is Vector<_>,
