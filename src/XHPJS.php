@@ -8,6 +8,8 @@
  * of patent rights can be found in the PATENTS file in the same directory.
  */
 
+use namespace HH\Lib\Vec;
+
 abstract final class XHPJS {
   public static function Element(HasXHPHelpers $element): XHPJSElementRef {
     return new XHPJSElementRef($element);
@@ -17,22 +19,22 @@ abstract final class XHPJS {
     return new XHPJSInstanceRef($element);
   }
 
-  public static function MapArgument(mixed $argument): array<mixed> {
+  public static function MapArgument(mixed $argument): (string, mixed) {
     if (is_scalar($argument) || $argument is Traversable<_>) {
-      return ['v', $argument];
+      return tuple('v', $argument);
     }
     if ($argument is XHPJSElementRef) {
-      return ['e', $argument->getElementID()];
+      return tuple('e', $argument->getElementID());
     }
     if ($argument is XHPJSInstanceRef) {
-      return ['i', $argument->getElementID()];
+      return tuple('i', $argument->getElementID());
     }
     throw new Exception("Unsupported argument type");
   }
 
   public static function MapArguments(
-    array<mixed> $arguments,
-  ): array<array<mixed>> {
-    return array_map(class_meth(self::class, 'MapArgument'), $arguments);
+    Traversable<mixed> $arguments,
+  ): vec<(string, mixed)> {
+    return Vec\map($arguments, $a ==> self::MapArgument($a));
   }
 }
