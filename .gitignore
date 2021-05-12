@@ -5,4 +5,5 @@ node_modules/*
 !node_modules/xhpjs
 www.pid
 composer.lock
-.*.hhast.*cache
+**hhast.parser-cache
+.var/

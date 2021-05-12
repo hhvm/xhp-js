@@ -20,21 +20,15 @@ xhp class x_js_scope extends x\element {
     $this->setContext('x_js_scope/calls', $calls);
     $this->setContext('x_js_scope/instances', $instances);
 
-    $child_waithandles = vec[];
-    foreach ($this->getChildren() as $child) {
-      if ($child is x\node) {
-        $child->__transferContext($this->getAllContexts());
-        // Can't use Vec\map_async, since we want these Awaitables to start
-        // when the entire tree is x\node only and all contexts have been transferred.
-        $child_waithandles[] = (async () ==> await $child->__flushSubtree())();
-      } else {
-        invariant_violation(
-          '%s is not an x\node',
-          is_object($child) ? get_class($child) : gettype($child),
-        );
-      }
-    }
-    $children = await Vec\from_async($child_waithandles);
+    $children = await Vec\map_async($this->getChildren(), async $c ==> {
+      invariant($c is x\node,
+        '%s is not an x\node',
+        is_object($c) ? get_class($c) : gettype($c),
+      );
+      $c->__transferContext($this->getAllContexts());
+      return await $c->__flushSubtree();
+    });
+
     $this->replaceChildren();
 
     return
