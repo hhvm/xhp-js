@@ -15,13 +15,26 @@ use type Facebook\XHP\HTML\HasXHPHTMLHelpers;
 trait XHPJSCall {
   require extends x\element;
 
-  protected function jsCall(string $module, string $method, mixed ...$args): void {
+  protected function jsCall(
+    string $module,
+    string $method,
+    mixed ...$args
+  ): void {
     $calls = $this->getContext('x_js_scope/calls', null);
     invariant(
       $calls is ScriptDataList,
-      'Can not use jsCall unless x_js_scope is an ancestor in the tree'
+      'Can not use jsCall unless x_js_scope is an ancestor in the tree',
     );
-    $calls->append(tuple($module, $method, Vec\map($args, $arg ==> _Private\to_js_value($arg))));
+    $calls->append(tuple(
+      $module,
+      $method,
+      Vec\map(
+        $args,
+        $arg ==>
+          /* HHAST_FIXME[NamespacePrivate] Fix when picking a namespace for this project */
+          _Private\to_js_value($arg),
+      ),
+    ));
   }
 
   protected function toJSElementRef(

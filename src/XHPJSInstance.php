@@ -25,9 +25,18 @@ trait XHPJSInstance implements HasXHPJSInstance {
     $instances = $this->getContext('x_js_scope/instances', null);
     invariant(
       $instances is ScriptDataList,
-      'Can not use constructJSInstance unless x_js_scope is an ancestor in tree'
+      'Can not use constructJSInstance unless x_js_scope is an ancestor in tree',
     );
-    $instances->append(tuple($this->getID(), $module, Vec\map($args, $arg ==> _Private\to_js_value($arg))));
+    $instances->append(tuple(
+      $this->getID(),
+      $module,
+      Vec\map(
+        $args,
+        $arg ==>
+          /* HHAST_FIXME[NamespacePrivate] Fix when picking a namespace for this project */
+          _Private\to_js_value($arg),
+      ),
+    ));
   }
 
   protected function toJSInstanceRef(): XHPJSInstanceRef {
