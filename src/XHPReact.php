@@ -8,18 +8,25 @@
  * of patent rights can be found in the PATENTS file in the same directory.
  */
 
+use type Facebook\XHP\HTML\HasXHPHTMLHelpers;
+
+/**
+ * @deprecated This does not work with modern versions of React.
+ * @see https://github.com/hhvm/xhp-js/issues/8
+ */
 trait XHPReact {
   use XHPJSCall;
-  require implements HasXHPHelpers;
+  require implements HasXHPHTMLHelpers;
 
+  <<__Deprecated('This does not work with modern versions of React.')>>
   protected function constructReactInstance(
     string $module,
-    Map<string, mixed> $attributes,
-  ) {
+    dict<string, mixed> $attributes,
+  ): void {
     $this->jsCall(
       'XHPJS',
       'renderReactElement',
-      XHPJS::Element($this),
+      $this->toJSElementRef(),
       $module,
       $attributes,
     );

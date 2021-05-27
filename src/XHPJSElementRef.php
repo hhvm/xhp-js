@@ -8,13 +8,14 @@
  * of patent rights can be found in the PATENTS file in the same directory.
  */
 
+use type Facebook\XHP\HTML\HasXHPHTMLHelpers;
+
 final class XHPJSElementRef {
 
-  public function __construct(private HasXHPHelpers $element) {
+  public function __construct(private HasXHPHTMLHelpers $element) {
   }
 
   public function getElementID(): string {
-    // UNSAFE: HasXHPHelpers should define 'getID' and so on :)
     return $this->element->getID();
   }
 }

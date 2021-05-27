@@ -8,15 +8,37 @@
  * of patent rights can be found in the PATENTS file in the same directory.
  */
 
-trait XHPJSCall {
-  require extends :x:element;
+use namespace /*HHAST_IGNORE_ERROR[UseStatementWithAs]*/ Facebook\XHP\Core as x;
+use namespace HH\Lib\Vec;
+use type Facebook\XHP\HTML\HasXHPHTMLHelpers;
 
-  protected function jsCall(string $module, string $method, ...$args): void {
-    $calls = $this->getContext(':x:js-scope/calls', null);
+trait XHPJSCall {
+  require extends x\element;
+
+  protected function jsCall(
+    string $module,
+    string $method,
+    mixed ...$args
+  ): void {
+    $calls = $this->getContext('x_js_scope/calls', null);
     invariant(
-      $calls instanceof Vector,
-      "Can not use jsCall unless :x:js-scope is an ancestor in the tree"
+      $calls is ScriptDataList,
+      'Can not use jsCall unless x_js_scope is an ancestor in the tree',
     );
-    $calls[] = Vector { $module, $method, XHPJS::MapArguments($args) };
+    $calls->append(tuple(
+      $module,
+      $method,
+      Vec\map(
+        $args,
+        $arg ==>
+          /* HHAST_FIXME[NamespacePrivate] Fix when picking a namespace for this project */
+          _Private\to_js_value($arg),
+      ),
+    ));
+  }
+
+  protected function toJSElementRef(
+  ): XHPJSElementRef where this as HasXHPHTMLHelpers {
+    return new XHPJSElementRef($this as HasXHPHTMLHelpers);
   }
 }

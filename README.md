@@ -16,45 +16,43 @@ A full example is available at https://github.com/hhvm/xhp-js-example
 ### Calling a Javascript function
 
 ```Hack
-class :example:jscall extends :x:element {
-  use XHPHelpers;
+xhp class JsCallExample extends HTML\element {
+  use XHPHTMLHelpers;
   use XHPJSCall;
 
-  attribute :xhp:html-element;
-
-  protected function render(): XHPRoot {
+  <<__Override>>
+  protected function renderAsync(): Awaitable<x\node> {
     $this->jsCall(
       'ModuleName',
       'functionName',
       'First argument',
-      // This pases the DOM node corresponding to the <div /> below
-      XHPJS::Element($this),
-      'Third arugment',
+      // This passes the DOM node corresponding to the <div /> below
+      $this->toJSElementRef(),
+      'Third argument',
     );
 
     return <div id={$this->getID()} />;
   }
 }
 
-print
-  <html><head /><body>
-    <x:js-scope><example:js-call /><x:js-scope>
-  </body></html>;
+$xhp = <html><head /><body>
+  <x_js_scope><JsCallExample /><x_js_scope>
+</body></html>;
+echo await $xhp->toStringAsync();
 ```
 
 ### Creating a Javascript Object
 
 ```Hack
-class :example:jsinstance extends :x:element {
-  use XHPHelpers;
+xhp class JSInstanceExample extends HTML\element {
+  use XHPHTMLHelpers;
   use XHPJSCall;
 
-  attribute :xhp:html-element;
-
-  protected function render(): XHPRoot {
+  <<__Override>>
+  protected function renderAsync(): Awaitable<x\node> {
     $this->constructJSInstance(
       'ClassName',
-      XHPJS::Element($this),
+      $this->toJSElementRef(),
       // can pass through other arguments too
     );
 
@@ -62,46 +60,22 @@ class :example:jsinstance extends :x:element {
       'MyModule',
       'myFunction',
       // This passes the JS object created above
-      XHPJS::Instance($this),
+      $this->toJSInstanceRef(),
     );
 
     return <div id={$this->getID()} />;
   }
 }
 
-print
-  <html><head /><body>
-    <x:js-scope><example:js-instance /><x:js-scope>
-  </body></html>;
+
+$xhp = <html><head /><body>
+  <x_js_scope><JSInstanceExample /><x_js_scope>
+</body></html>;
 ```
 
 ### Creating a React component
 
-```Hack
-class :example:typeahead extends :x:element implements XHPAwaitable {
-  use XHPHelpers;
-  use XHPReact;
-  use XHPAsync;
-
-  attribute :xhp:html-element;
-
-  protected async function asyncRender(): Awaitable<XHPRoot> {
-    $friend_names = await FriendsList::fetch($this->getContext('Viewer'));
-
-    $this->constructReactInstance(
-      'ReactTypeahead',
-      Map { 'friends' => $friend_names },
-    );
-    
-    return <div id={$this->getID()} />;
-  }
-}
-
-print
-  <html><head /><body>
-    <x:js-scope><example:typeahead /><x:js-scope>
-  </body></html>;
-```
+*This functionality was based on an extremely old React version. The example has been removed.*
 
 ## Writing your JavaScript
 
@@ -130,7 +104,7 @@ In turn, your JavaScript may look like:
 
 ```Javascript
 var MyModule = {
-  myFunction: function() {
+  myMethod: function() {
     // ...
   }
 };

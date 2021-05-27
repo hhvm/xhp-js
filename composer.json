@@ -4,8 +4,8 @@
   "keywords": ["facebook", "xhp", "hhvm", "hack", "react", "js", "javascript"],
   "homepage": "https://github.com/hhvm/xhp-js",
   "require": {
-    "facebook/xhp-lib": "^2.3.0",
-    "hhvm": "~3.6"
+    "facebook/xhp-lib": "^4",
+    "hhvm": "^4.73"
   },
   "autoload": {
     "classmap": ["src/"]
@@ -14,5 +14,8 @@
     "post-install-cmd": [
       "npm install && npm run build"
     ]
+  },
+  "require-dev": {
+    "hhvm/hhast": "^4"
   }
 }

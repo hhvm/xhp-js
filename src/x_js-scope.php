@@ -8,28 +8,27 @@
  * of patent rights can be found in the PATENTS file in the same directory.
  */
 
-class :x:js-scope extends :x:element implements XHPAwaitable {
-  use XHPAsync;
+use namespace /*HHAST_IGNORE_ERROR[UseStatementWithAs]*/ Facebook\XHP\Core as x;
+use type Facebook\XHP\HTML\script;
+use namespace HH\Lib\Vec;
 
-  protected async function asyncRender(): Awaitable<XHPRoot> {
-    $calls = Vector { };
-    $instances = Vector { };
-    $this->setContext(':x:js-scope/calls', $calls);
-    $this->setContext(':x:js-scope/instances', $instances);
+xhp class x_js_scope extends x\element {
+  <<__Override>>
+  protected async function renderAsync(): Awaitable<x\node> {
+    $calls = new ScriptDataList();
+    $instances = new ScriptDataList();
+    $this->setContext('x_js_scope/calls', $calls);
+    $this->setContext('x_js_scope/instances', $instances);
 
-    $child_waithandles = Vector { };
-    foreach ($this->getChildren() as $child) {
-      if ($child instanceof :x:composable-element) {
-        $child->__transferContext($this->getAllContexts());
-        $child_waithandles[] = (async () ==> await $child->__flushSubtree())();
-      } else {
-        invariant_violation(
-          '%s is not an :x:composable-element',
-          is_object($child) ? get_class($child) : gettype($child),
-        );
-      }
-    }
-    $children = await HH\Asio\v($child_waithandles);
+    $children = await Vec\map_async($this->getChildren(), async $c ==> {
+      invariant($c is x\node,
+        '%s is not an x\node',
+        is_object($c) ? get_class($c) : gettype($c),
+      );
+      $c->__transferContext($this->getAllContexts());
+      return await $c->__flushSubtree();
+    });
+
     $this->replaceChildren();
 
     return
