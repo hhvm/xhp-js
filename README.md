@@ -122,4 +122,4 @@ xhpjs.min.js directly to declare an XHPJS object in the global scope.
 See https://github.com/hhvm/xhp-js-example for a full example.
 
 ## License
-XHP-JS is BSD-licensed. We also provide an additional patent grant.
+XHP-JS is [MIT-licensed](LICENSE).
